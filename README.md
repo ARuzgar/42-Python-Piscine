@@ -1,2 +1,2 @@
-# 42---Python-Piscine
+# 42-Python-Piscine
 Learning Python For Data Science
