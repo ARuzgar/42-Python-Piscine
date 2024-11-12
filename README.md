@@ -3,7 +3,7 @@ Learning Python For Data Science
 
 **These tasks wants us to use Python 3.10 spesifically, so our first initial step to arrange it out.**
 
-<summary> # 🐍 Getting Started with Python 3.10
+<summary> # 🐍 Getting Started with Python 3.10  </summary>
 
 > A comprehensive guide to setting up Python 3.10 across different environments and platforms.
 
@@ -180,4 +180,4 @@ docker run my-python-app
 
 ⭐ Don't forget to star this repo if you found it helpful!
 
-</div> </summary>
+</div>
