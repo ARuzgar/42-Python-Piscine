@@ -1,11 +1,23 @@
 def NULL_not_found(object: any) -> int:
-    try:
-        print(f"{type(object)}: {object}")
+    title_dict = {
+        "NoneType": "Nothing:",
+        "float": "Cheese:" if object != object else None,
+        "int": "Zero:" if object == 0 else None,
+        "str": "Empty:" if object == "" else None,
+        "bool": "Fake:" if object == False else None,
+    }
+    
+    typ = type(object)
+    name = typ.__name__
+    title = title_dict.get(name)
+    
+    if title:
+        print(f"{title} {object} {object.__class__}")
         return 0
-    except:
+    else:
         print("Type not Found")
         return 1
-    
+
 Nothing = None
 Garlic = float("NaN")
 Zero = 0
