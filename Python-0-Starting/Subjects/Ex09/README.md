@@ -70,4 +70,4 @@ pip install ./dist/ft_package-0.0.1-py3-none-any.whl
 
 ## 📄 License
 
-MIT License. See `LICENSE` file for details.
+MIT License. See `LICENSE.txt` file for details.
