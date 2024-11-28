@@ -71,7 +71,3 @@ pip install ./dist/ft_package-0.0.1-py3-none-any.whl
 ## 📄 License
 
 MIT License. See `LICENSE` file for details.
-
-## 🤝 Contributing
-
-Pull requests are welcome! Please ensure tests pass and code follows Flake8 standards.
