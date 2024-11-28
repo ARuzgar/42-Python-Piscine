@@ -40,12 +40,6 @@ print(reversed_list)  # Output: ["c", "b", "a"]
 python -m unittest discover tests
 ```
 
-### Code Style Check
-```bash
-pip install flake8
-flake8 ft_package/ tests/
-```
-
 ## 📂 Project Structure
 
 ```
