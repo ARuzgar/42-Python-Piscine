@@ -1,12 +1,32 @@
 """
 zoom.py
 
-Script to load an image, zoom into it, and display it with information.
+Script to load an image, zoom into it in grayscale, display the zoomed area, and save it automatically.
 """
 
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 from load_image import ft_load
+
+
+def convert_to_grayscale(image: np.ndarray) -> np.ndarray:
+    """
+    Convert an RGB image to grayscale.
+
+    Args:
+        image (np.ndarray): The RGB image as a NumPy array.
+
+    Returns:
+        np.ndarray: Grayscale version of the image.
+    """
+    if len(image.shape) == 3 and image.shape[2] == 3:  # If RGB
+        grayscale = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])  # Grayscale formula
+        return grayscale.astype(np.uint8)
+    elif len(image.shape) == 2:  # Already grayscale
+        return image
+    else:
+        raise ValueError("Image format not supported for grayscale conversion.")
 
 
 def zoom_image(image: np.ndarray, start_x: int, end_x: int, start_y: int, end_y: int) -> np.ndarray:
@@ -27,40 +47,52 @@ def zoom_image(image: np.ndarray, start_x: int, end_x: int, start_y: int, end_y:
         ValueError: If the slicing indices are invalid.
     """
     try:
-        # Slice the image
         zoomed_image = image[start_y:end_y, start_x:end_x]
-
-        # Print new shape after slicing
         print(f"New shape after slicing: {zoomed_image.shape}")
         print(zoomed_image)
-
         return zoomed_image
     except Exception as e:
         raise ValueError(f"An error occurred while zooming into the image: {e}")
 
 
-def display_image(image: np.ndarray, title: str = "Image") -> None:
+def display_zoomed_image(image: np.ndarray) -> None:
     """
-    Display the image with scales on the X and Y axes.
+    Display the zoomed grayscale image.
 
     Args:
-        image (np.ndarray): The image to display.
-        title (str): The title of the displayed image.
+        image (np.ndarray): The zoomed grayscale image to display.
     """
-    plt.imshow(image, cmap='gray' if image.ndim == 2 else None)
-    plt.title(title)
-    plt.colorbar()
+    plt.imshow(image, cmap="gray")
+    plt.axis("on")  # Keep axes for clarity
     plt.show()
+
+
+def save_zoomed_image(image: np.ndarray, filename: str) -> None:
+    """
+    Save the zoomed grayscale image to a file.
+
+    Args:
+        image (np.ndarray): The zoomed grayscale image.
+        filename (str): The filename to save the image as.
+    """
+    try:
+        img = Image.fromarray(image.astype(np.uint8))
+        img.save(filename)
+    except Exception as e:
+        print(f"Error saving the image: {e}")
 
 
 def main() -> None:
     """
-    Main function to load, zoom, and display the image.
+    Main function to load, zoom, display, and save the zoomed grayscale image.
     """
     try:
         # Load the image
-        image_path = "animal.jpeg"  # Replace with the path to your image
+        image_path = "animal.jpeg"
         image = ft_load(image_path)
+
+        # Convert the image to grayscale
+        grayscale_image = convert_to_grayscale(image)
 
         # Calculate zoom area based on center coordinates
         center_x, center_y = 650, 300
@@ -68,16 +100,18 @@ def main() -> None:
 
         # Calculate slicing coordinates
         start_x = max(0, center_x - zoom_width // 2)
-        end_x = min(image.shape[1], center_x + zoom_width // 2)
+        end_x = min(grayscale_image.shape[1], center_x + zoom_width // 2)
         start_y = max(0, center_y - zoom_height // 2)
-        end_y = min(image.shape[0], center_y + zoom_height // 2)
+        end_y = min(grayscale_image.shape[0], center_y + zoom_height // 2)
 
         # Apply zoom
-        zoomed_image = zoom_image(image, start_x, end_x, start_y, end_y)
+        zoomed_image = zoom_image(grayscale_image, start_x, end_x, start_y, end_y)
 
-        # Display the original and zoomed images
-        display_image(image, title="Original Image")
-        display_image(zoomed_image, title="Zoomed Image")
+        # Save the zoomed grayscale image
+        save_zoomed_image(zoomed_image, "zoomed_animal.jpeg")
+
+        # Display only the zoomed grayscale image
+        display_zoomed_image(zoomed_image)
     except (FileNotFoundError, ValueError, Exception) as error:
         print(f"Error: {error}")
 
