@@ -5,7 +5,6 @@ Module to load an image, print its format and RGB pixel content.
 Handles JPG and JPEG formats with comprehensive error handling.
 """
 
-from typing import Union, List
 import os
 import numpy as np
 from PIL import Image
@@ -24,7 +23,8 @@ def ft_load(path: str) -> np.ndarray:
     Raises:
         TypeError: If 'path' is not a string.
         FileNotFoundError: If the image file does not exist.
-        ValueError: If the image format is not JPG or JPEG, or if an error occurs during loading.
+        ValueError: If the image format is not JPG or JPEG,
+        or if an error occurs during loading.
     """
     # Validate that 'path' is a string
     if not isinstance(path, str):
@@ -36,7 +36,9 @@ def ft_load(path: str) -> np.ndarray:
 
     # Check if the file has a valid image extension
     if not path.lower().endswith(('.jpg', '.jpeg')):
-        raise ValueError("Unsupported file format. Only JPG and JPEG are supported.")
+        raise ValueError(
+            "Unsupported file format. Only JPG and JPEG are supported."
+            )
 
     try:
         # Open the image using Pillow

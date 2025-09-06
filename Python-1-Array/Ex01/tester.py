@@ -2,6 +2,7 @@
 
 from array2D import slice_me
 
+
 def main():
     """Test the slice_me function with sample data."""
     family = [
@@ -22,6 +23,7 @@ def main():
 
     except (TypeError, ValueError) as error:
         print(f"Error: {error}")
+
 
 if __name__ == "__main__":
     main()

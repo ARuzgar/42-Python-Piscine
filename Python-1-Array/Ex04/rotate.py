@@ -1,7 +1,8 @@
 """
 rotate.py
 
-Script to load an image, adjust its size to 400x400 if necessary, convert it to grayscale, manually transpose it, and display the result.
+Script to load an image, adjust its size to 400x400 if necessary,
+convert it to grayscale, manually transpose it, and display the result.
 """
 
 import matplotlib.pyplot as plt
@@ -19,8 +20,8 @@ def convert_to_grayscale(image: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: Grayscale version of the image.
     """
-    if len(image.shape) == 3 and image.shape[2] == 3:  # If RGB
-        grayscale = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])  # Grayscale formula
+    if len(image.shape) == 3 and image.shape[2] == 3:
+        grayscale = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])
         return grayscale.astype(np.uint8)
     elif len(image.shape) == 2:  # Already grayscale
         return image
@@ -28,10 +29,11 @@ def convert_to_grayscale(image: np.ndarray) -> np.ndarray:
         raise ValueError("Unsupported image format for grayscale conversion.")
 
 
-def crop_to_400x400(image: np.ndarray, center_x: int, center_y: int) -> np.ndarray:
+def crop_to_400x400(image: np.ndarray,
+                    center_x: int, center_y: int) -> np.ndarray:
     """
-    Crop the image to 400x400 pixels based on given center coordinates. If the image
-    is already 400x400, return it as is.
+    Crop the image to 400x400 pixels based on given center coordinates.
+    If the image is already 400x400, return it as is.
 
     Args:
         image (np.ndarray): The input image.
@@ -51,7 +53,7 @@ def crop_to_400x400(image: np.ndarray, center_x: int, center_y: int) -> np.ndarr
     start_y = max(0, center_y - square_size // 2)
     end_y = min(image.shape[0], center_y + square_size // 2)
 
-    # Adjust the slice if the cropped region is smaller than 400x400 (edge case)
+    # Adjust the slice if the cropped region is smaller than 400x400
     if end_x - start_x < 400:
         start_x = max(0, end_x - 400)
         end_x = start_x + 400
@@ -63,7 +65,7 @@ def crop_to_400x400(image: np.ndarray, center_x: int, center_y: int) -> np.ndarr
     cropped_image = image[start_y:end_y, start_x:end_x]
 
     # Ensure the cropped image is exactly 400x400
-    assert cropped_image.shape == (400, 400), f"Unexpected cropped shape: {cropped_image.shape}"
+    assert cropped_image.shape == (400, 400), f"Mismatch:{cropped_image.shape}"
     return cropped_image
 
 
@@ -99,7 +101,8 @@ def display_image(image: np.ndarray) -> None:
 
 def main() -> None:
     """
-    Main function to load, adjust, transpose, and display an image in grayscale.
+    Main function to load, adjust, transpose,
+    and display an image in grayscale.
     """
     try:
         # Load the image

@@ -1,7 +1,8 @@
 """
 zoom.py
 
-Script to load an image, zoom into it in grayscale, display the zoomed area, and save it automatically.
+Script to load an image, zoom into it in grayscale, display the zoomed area,
+and save it automatically.
 """
 
 import matplotlib.pyplot as plt
@@ -21,15 +22,19 @@ def convert_to_grayscale(image: np.ndarray) -> np.ndarray:
         np.ndarray: Grayscale version of the image.
     """
     if len(image.shape) == 3 and image.shape[2] == 3:  # If RGB
-        grayscale = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])  # Grayscale formula
+        grayscale = np.dot(image[..., :3], [0.2989, 0.5870, 0.1140])
         return grayscale.astype(np.uint8)
     elif len(image.shape) == 2:  # Already grayscale
         return image
     else:
-        raise ValueError("Image format not supported for grayscale conversion.")
+        raise ValueError(
+            "Image format not supported for grayscale conversion."
+            )
 
 
-def zoom_image(image: np.ndarray, start_x: int, end_x: int, start_y: int, end_y: int) -> np.ndarray:
+def zoom_image(image: np.ndarray,
+               start_x: int, end_x: int,
+               start_y: int, end_y: int) -> np.ndarray:
     """
     Zoom into a specific area of the image by slicing it.
 
@@ -52,7 +57,9 @@ def zoom_image(image: np.ndarray, start_x: int, end_x: int, start_y: int, end_y:
         print(zoomed_image)
         return zoomed_image
     except Exception as e:
-        raise ValueError(f"An error occurred while zooming into the image: {e}")
+        raise ValueError(
+            f"An error occurred while zooming into the image: {e}"
+            )
 
 
 def display_zoomed_image(image: np.ndarray) -> None:
@@ -105,7 +112,8 @@ def main() -> None:
         end_y = min(grayscale_image.shape[0], center_y + zoom_height // 2)
 
         # Apply zoom
-        zoomed_image = zoom_image(grayscale_image, start_x, end_x, start_y, end_y)
+        zoomed_image = zoom_image(grayscale_image,
+                                  start_x, end_x, start_y, end_y)
 
         # Save the zoomed grayscale image
         save_zoomed_image(zoomed_image, "zoomed_animal.jpeg")

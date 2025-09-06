@@ -1,5 +1,6 @@
 """
-Module to implement a custom tqdm-like progress bar using the yield operator.
+Module to implement a custom
+tqdm-like progress bar using the yield operator.
 """
 
 import sys

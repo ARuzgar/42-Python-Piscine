@@ -2,6 +2,7 @@
 
 from give_bmi import give_bmi, apply_limit
 
+
 def main():
     """Test the give_bmi and apply_limit functions."""
     height = [2.71, 1.15]
@@ -16,6 +17,7 @@ def main():
 
     except (TypeError, ValueError) as e:
         print(f"Error: {e}")
+
 
 if __name__ == "__main__":
     main()

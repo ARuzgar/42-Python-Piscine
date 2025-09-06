@@ -1,14 +1,16 @@
 """
 give_bmi.py
 
-Module to calculate BMI values and apply a limit to determine if they are above the threshold.
+Module to calculate BMI values and apply a limit to determine
+if they are above the threshold.
 """
 
 from typing import List, Union
 import numpy as np
 
 
-def give_bmi(height: List[Union[int, float]], weight: List[Union[int, float]]) -> List[float]:
+def give_bmi(height: List[Union[int, float]],
+             weight: List[Union[int, float]]) -> List[float]:
     """
     Calculate BMI values from lists of heights and weights.
 
@@ -21,7 +23,8 @@ def give_bmi(height: List[Union[int, float]], weight: List[Union[int, float]]) -
 
     Raises:
         TypeError: If inputs are not lists or contain non-numeric values.
-        ValueError: If input lists are of different lengths or contain non-positive values.
+        ValueError: If input lists are of different lengths or contain
+        non-positive values.
     """
     # Validate input types
     if not isinstance(height, list) or not isinstance(weight, list):
@@ -35,11 +38,15 @@ def give_bmi(height: List[Union[int, float]], weight: List[Union[int, float]]) -
         height_array = np.array(height, dtype=float)
         weight_array = np.array(weight, dtype=float)
     except ValueError:
-        raise TypeError("All elements in height and weight lists must be integers or floats.")
+        raise TypeError(
+            "All elements in height and weight lists must be integers/floats."
+            )
 
     # Check for non-positive values
     if np.any(height_array <= 0) or np.any(weight_array <= 0):
-        raise ValueError("All height and weight values must be positive numbers.")
+        raise ValueError(
+            "All height and weight values must be positive numbers."
+            )
 
     # Calculate BMI: weight / (height^2)
     bmi_array = weight_array / (height_array ** 2)
@@ -47,7 +54,8 @@ def give_bmi(height: List[Union[int, float]], weight: List[Union[int, float]]) -
     return bmi_array.tolist()
 
 
-def apply_limit(bmi: List[Union[int, float]], limit: Union[int, float]) -> List[bool]:
+def apply_limit(bmi: List[Union[int, float]],
+                limit: Union[int, float]) -> List[bool]:
     """
     Determine if each BMI value is above the specified limit.
 
@@ -59,7 +67,8 @@ def apply_limit(bmi: List[Union[int, float]], limit: Union[int, float]) -> List[
         List[bool]: List indicating whether each BMI is above the limit.
 
     Raises:
-        TypeError: If bmi is not a list or contains non-numeric values, or if limit is not numeric.
+        TypeError: If bmi is not a list or contains non-numeric values
+        , or if limit is not numeric.
     """
     # Validate input types
     if not isinstance(bmi, list):
@@ -82,9 +91,11 @@ def apply_limit(bmi: List[Union[int, float]], limit: Union[int, float]) -> List[
 
 def main() -> None:
     """
-    Main function to demonstrate the usage of give_bmi and apply_limit functions.
+    Main function to demonstrate the usage of give_bmi
+    and apply_limit functions.
 
-    This function is intended for testing purposes and will execute when the script is run directly.
+    This function is intended for testing purposes
+    and will execute when the script is run directly.
     """
     try:
         # Sample data
